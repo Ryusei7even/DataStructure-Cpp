@@ -251,7 +251,6 @@ int main()
 	A.Print();
 	Matrix B = A; //拷贝构造
 
-
 	/* 初等行、列变换 */
 
 	int arr[][3] = {{0, 0, 1},
@@ -272,7 +271,6 @@ int main()
 	cout << "Matrix A swap column 1 and 2:" << endl;
 	A2.Print(); //列变换，A互换1、2列
 
-
 	Matrix M(3, 3); //3*3零矩阵
 	M += 1;
 	int arr3[][3] = {{1, 0, 0},
@@ -282,14 +280,48 @@ int main()
 	N = *arr3;
 
 	Matrix Q = N * M;
-	cout << "Q:\n" << endl; //矩阵M第二行乘以3，第三行乘以2
+	cout << "Q:\n"
+		 << endl; //矩阵M第二行乘以3，第三行乘以2
 	Q.Print();
 
 	Matrix R = M * N;
-	cout << "R:\n" << endl; //矩阵M第二列乘以3，第三列乘以2
+	cout << "R:\n"
+		 << endl; //矩阵M第二列乘以3，第三列乘以2
 	R.Print();
 
+	cout << endl;
 
+	/* 行、列向量 */
+	int vec1[][1] = {{1},
+					 {2},
+					 {3}};
+	Matrix alpha(3, 1);
+	alpha = *vec1; //列向量
+
+	int vec2[][3] = {{2, 2, 2}};
+	Matrix beta(1, 3);
+	beta = *vec2; //行向量
+
+	cout << "alpha multiply beta: " << endl;
+	Matrix isMatrix = alpha * beta; //列在前，行在后，乘出来是矩阵
+	isMatrix.Print();
+
+	cout << endl;
+
+	cout << "beta multiply alpha: " << endl;
+	Matrix isNumber = beta * alpha; //行在前，列在后，乘出来是数
+	isNumber.Print();
+
+	Matrix gamma = alpha; //gamma为原alpha
+	alpha.Trans();   //alpha转置
+	
+	// gamma.Print();
+	// alpha.Print();
+	cout << "alpha multiply alphaT: " << endl;
+	gamma*=alpha;
+	gamma.Print();   //对称矩阵
+
+	cout << "--------------------------------" << endl;
 
 	A -= 1;
 	A -= B;
@@ -320,14 +352,13 @@ int main()
 	cout << "C multiply E: " << endl;
 	CmE.Print();
 
-
-	int arr4[][3] = {{2, 0, 0},
-					 {6, 0, 0},
-					 {-4, 0, 0}};
-	Matrix Z(3, 3);
-	Z = *arr4;
-	Z*=Z;
-	Z.Print();
+	// int arr4[][3] = {{2, 0, 0},
+	// 				 {6, 0, 0},
+	// 				 {-4, 0, 0}};
+	// Matrix Z(3, 3);
+	// Z = *arr4;
+	// Z *= Z;
+	// Z.Print();
 
 	return 0;
 }
