@@ -312,6 +312,9 @@ int main()
 	Matrix isNumber = beta * alpha; //行在前，列在后，乘出来是数
 	isNumber.Print();
 
+	cout << endl;
+
+
 	Matrix gamma = alpha; //gamma为原alpha
 	alpha.Trans();   //alpha转置
 	
