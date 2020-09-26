@@ -321,8 +321,13 @@ int main()
 	// gamma.Print();
 	// alpha.Print();
 	cout << "alpha multiply alphaT: " << endl;
-	gamma*=alpha;
-	gamma.Print();   //对称矩阵
+	Matrix Symmetric=gamma*alpha;
+	Symmetric.Print();   //对称矩阵
+
+	cout << endl;
+	cout << "alphaT multiply alpha: " << endl;
+	Matrix quadraticSum=alpha*gamma;
+	quadraticSum.Print();   //平方和
 
 	cout << "--------------------------------" << endl;
 

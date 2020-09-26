@@ -14,10 +14,11 @@ public:
     int GetElem(int i);        //获取第i个位置元素值
     int LocateElem(int value); //查找第一个值为value的元素，返回下标
     bool IsEmpty();
-    bool Insert(int i, int value); //第i个位置前插入值为value的元素
-    void Reverse();                //顺序表反转
-    void ReversePointer();         //顺序表反转法2
-    void DeleteElem(int i);        //删除第i个元素
+    bool Insert(int i, int value);  //第i个位置前插入值为value的元素
+    void Reverse();                 //顺序表反转
+    void ReversePointer();          //顺序表反转法2
+    void DeleteElem(int i);         //删除第i个元素
+    void DeleteSpecificElem(int x); //删除顺序表中所有元素值为x的元素
 
 private:
     int *elem; //存储空间基址
@@ -142,18 +143,40 @@ void SeqList::DeleteElem(int i)
     --len;
 }
 
+void SeqList::DeleteSpecificElem(int x)
+{
+    int k = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (elem[i] != x)
+        {
+            elem[k++] = elem[i];
+        }
+    }
+    len = k;
+}
+
 int main()
 {
-    int arr[] = {1, 8, 7, 2, 5, 3, 4, 6};
-    // int arr[] = {1};
+    int size;
+    cout << "Input size of sequence list:" << endl;
+    //e.g. 8
+    cin >> size;
+    int arr[size];
+    cout << "Input elements: " << endl;
+    //e.g. 1 8 7 2 5 2 4 6
+    for (int i = 0; i < size; i++)
+    {
+        cin >> arr[i];
+    }
     SeqList slist;
     slist.Create(arr, 8);
 
-    slist.DeleteElem(3);
+    slist.DeleteElem(3); //删除第3个元素
     cout << slist.GetLength() << endl;
     slist.Print();
 
-    cout << slist.LocateElem(8); //8的下标为1
+    cout << slist.LocateElem(8); //8的下标为2 (线性表下标从1开始)
     cout << endl;
 
     slist.Insert(1, 99);
@@ -162,6 +185,9 @@ int main()
     // slist.Reverse();
     slist.ReversePointer();
 
+    slist.Print();
+
+    slist.DeleteSpecificElem(2);
     slist.Print();
 
     return 0;
